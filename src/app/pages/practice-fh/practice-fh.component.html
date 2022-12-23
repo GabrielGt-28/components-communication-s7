@@ -1,0 +1,9 @@
+<h1>Home components</h1>
+<hr />
+
+<h3>{{ name }}</h3>
+
+<button class="btn btn-primary" (click)="changeName()">Cambiar</button>
+
+<hr />
+<app-son [nameSon]="name" (changeNameSon)="name = $event"></app-son>

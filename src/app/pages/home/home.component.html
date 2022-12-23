@@ -1,0 +1,87 @@
+<div class="container section-form">
+  <h1>Registro de personas</h1>
+
+  <app-son-form-s7 [formObject]="dataForm"></app-son-form-s7>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']
+        "
+      >
+        Campo requerido
+      </div>
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+        contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['minlength']
+      "
+      >
+        Minino de caracteres
+        {{ contactForm.get('name')?.errors?.['minlength']?.requiredLength }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="dniNumber" class="form-label">DNI</label>
+      <input
+        type="number"
+        class="form-control"
+        id="dniNumber"
+        formControlName="dniNumber"
+      />
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          contactForm.get('dniNumber')?.touched && contactForm.get('dniNumber')?.errors?.['required']
+        "
+      >
+        Campo requerido
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="civilStatus" class="form-label">Estado civil </label>
+
+      <select
+        class="form-select"
+        id="civilStatus"
+        formControlName="civilStatus"
+        aria-placeholder="Estado civil"
+      >
+        <option value="soltero" selected>Soltero</option>
+        <option value="casado">Casado</option>
+        <option value="divorciado">Divorciado</option>
+        <option value="viudo">Viudo</option>
+      </select>
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          contactForm.get('civilStatus')?.touched && contactForm.get('civilStatus')?.errors?.['required']
+        "
+      >
+        Campo requerido
+      </div>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="contactForm.invalid"
+    >
+      Enviar
+    </button>
+  </form>
+</div>
